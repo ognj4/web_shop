@@ -1,8 +1,7 @@
 @extends('layout')
 @section('naslovStranice')
-    Home strana
+    Shop strana
 @endsection
 @section('sadrzajStranice')
-    <p>Hello</p>
+<p>Shop</p>
 @endsection
-
