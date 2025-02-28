@@ -1,12 +1,15 @@
-@extends('layout')
+@extends("layout")
+
 @section('naslovStranice')
-    Shop strana
+    Prodavnica
 @endsection
+
 @section('sadrzajStranice')
 
-    @foreach($products as $singleProduct)
 
-        <p>{{ $singleProduct }}</p>
+    @foreach( $products as $product)
+
+        <p>{{$product->name}} - {{$product->description}}</p>
 
     @endforeach
 
