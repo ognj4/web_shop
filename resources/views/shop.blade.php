@@ -3,5 +3,11 @@
     Shop strana
 @endsection
 @section('sadrzajStranice')
-<p>Shop</p>
+
+    @foreach($products as $singleProduct)
+
+        <p>{{ $singleProduct }}</p>
+
+    @endforeach
+
 @endsection
