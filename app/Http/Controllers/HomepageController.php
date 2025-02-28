@@ -8,6 +8,7 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        return view ('welcome');
+        $trenutnoVreme = date('h:i:s');
+        return view ('welcome', compact('trenutnoVreme'));
     }
 }

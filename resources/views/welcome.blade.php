@@ -3,6 +3,8 @@
     Home strana
 @endsection
 @section('sadrzajStranice')
-    <p>Hello</p>
+
+    <p>{{ $trenutnoVreme }}</p>
+
 @endsection
 
