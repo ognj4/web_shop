@@ -1,6 +1,6 @@
 @extends('layout')
 @section('naslovStranice')
-    Home strana
+    Dashboard strana
 @endsection
 @section('sadrzajStranice')
     <p>{{ $trenutnoVreme }}</p>
