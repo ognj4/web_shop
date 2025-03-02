@@ -31,7 +31,7 @@ class ProductsController extends Controller
         ]);
 
         // koriscenje name rute
-        return redirect('/admin/all-products');
+        return redirect()->route('sviProizvodi');
     }
     public function delete($product)
     {

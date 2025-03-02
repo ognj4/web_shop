@@ -20,7 +20,8 @@
                 <td>{{$contact->subject}}</td>
                 <td>{{$contact->message}}</td>
                 <td>
-                    <a href="/admin/delete-contact/{{ $contact->id }}" class="btn btn-danger">Obrisi</a>
+                    {{--<a href="/admin/delete-contact/{{ $contact->id }}" class="btn btn-danger">Obrisi</a>--}}
+                    <a href="{{ route('obrisiKontakt', ['contact'=> $contact->id]) }}" class="btn btn-danger">Obrisi</a>
                     <a class="btn btn-primary">Edituj</a>
                 </td>
             </tr>

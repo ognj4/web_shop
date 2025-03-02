@@ -2,7 +2,7 @@
 
 @section("sadrzajStranice")
 
-    <form method="POST" action="/admin/save-product">
+    <form method="POST" action="{{ route('snimanjeOglasa') }}">
         @csrf
         <div>
             @if($errors->any())
