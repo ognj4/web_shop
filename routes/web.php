@@ -19,5 +19,7 @@ Route::get('/admin/all-products', [ProductsController::class,'index']);
 Route::get('/admin/delete-product/{product}', [ProductsController::class,'delete']);
 Route::get('/admin/delete-contact/{contact}', [ContactController::class, "delete"]);
 
+Route::view('/admin/add-product', 'addProduct');
+Route::post('/admin/save-product',[ProductsController::class, 'saveProduct']);
 
 Route::post('/send-contact', [ContactController::class,'sendContact']);
