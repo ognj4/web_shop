@@ -55,5 +55,6 @@ class ProductsController extends Controller
 
         $product->save();
 
-        return redirect()->route('sviProizvodi');    }
+        return redirect()->route('sviProizvodi');
+    }
 }
