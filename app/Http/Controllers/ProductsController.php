@@ -42,20 +42,12 @@ class ProductsController extends Controller
         $singleProduct->delete();
         return redirect()->back();
     }
-    public function singleProduct(Request $request, $id)
+    public function singleProduct(Request $request, ProductsModel $product)
     {
-        $product = ProductsModel::where(['id' => $id])->first();
-
-        if($product === null) {
-            die('Ne postoji proizvod');
-        }
-
-        return view ('products.edit',compact('product'));
+        return view ('products.edit', compact('product'));
     }
-    public function edit(Request $request, $id)
+    public function edit(Request $request, ProductsModel $product)
     {
-        $product = ProductsModel::where(['id' => $id])->first();
-
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->amount = $request->get('amount');

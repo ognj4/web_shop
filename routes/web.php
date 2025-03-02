@@ -28,8 +28,8 @@ Route::post('/admin/save-product',[ProductsController::class, 'saveProduct'])
 
 Route::post('/send-contact', [ContactController::class,'sendContact']);
 
-Route::get('admin/product/edit/{id}',[ProductsController::class,'singleProduct'])
+Route::get('admin/product/edit/{product}',[ProductsController::class,'singleProduct'])
     ->name('product.single');
 
-Route::post('admin/product/save/{id}',[ProductsController::class,'edit'])
+Route::post('admin/product/save/{product}',[ProductsController::class,'edit'])
     ->name('product.save');

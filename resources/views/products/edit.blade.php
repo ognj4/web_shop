@@ -2,7 +2,7 @@
 
 @section('sadrzajStranice')
 
-    <form method="POST" action="{{ route('product.save',['id'=>$product->id]) }}">
+    <form method="POST" action="{{ route('product.save',['product' => $product->id]) }}">
         @csrf
         <div class="mb-3">
             <label class="form-label">Name</label>
