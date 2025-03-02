@@ -27,3 +27,9 @@ Route::post('/admin/save-product',[ProductsController::class, 'saveProduct'])
     ->name('snimanjeOglasa');
 
 Route::post('/send-contact', [ContactController::class,'sendContact']);
+
+Route::get('admin/product/edit/{id}',[ProductsController::class,'singleProduct'])
+    ->name('product.single');
+
+Route::post('admin/product/save/{id}',[ProductsController::class,'edit'])
+    ->name('product.save');
