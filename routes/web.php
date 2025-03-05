@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Middleware\AdminCheckMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,7 +13,7 @@ Route::get('/',[HomepageController::class,'index']);
 Route::get('/shop',[ShopController::class,'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/all-contacts', [ContactController::class,'getAllContacts']);
     Route::get('/all-products', [ProductsController::class,'index'])
         ->name('sviProizvodi');
