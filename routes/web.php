@@ -8,33 +8,34 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::view('/about','about');
-
 Route::get('/',[HomepageController::class,'index']);
 Route::get('/shop',[ShopController::class,'index']);
-
 Route::get('/contact', [ContactController::class, 'index']);
 
-Route::get('/admin/all-contacts', [ContactController::class,'getAllContacts']);
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/all-contacts', [ContactController::class,'getAllContacts']);
+    Route::get('/all-products', [ProductsController::class,'index'])
+        ->name('sviProizvodi');
 
-Route::get('/admin/all-products', [ProductsController::class,'index'])
-    ->name('sviProizvodi');
+    Route::get('/delete-product/{product}', [ProductsController::class,'delete'])
+        ->name('obrisiProizvod');
+    Route::get('/delete-contact/{contact}', [ContactController::class, "delete"])
+        ->name('obrisiKontakt');
 
-Route::get('/admin/delete-product/{product}', [ProductsController::class,'delete'])
-    ->name('obrisiProizvod');
-Route::get('/admin/delete-contact/{contact}', [ContactController::class, "delete"])
-    ->name('obrisiKontakt');
+    Route::view('/add-product', 'addProduct');
+    Route::post('/save-product',[ProductsController::class, 'saveProduct'])
+        ->name('snimanjeOglasa');
 
-Route::view('/admin/add-product', 'addProduct');
-Route::post('/admin/save-product',[ProductsController::class, 'saveProduct'])
-    ->name('snimanjeOglasa');
+    Route::post('/send-contact', [ContactController::class,'sendContact']);
 
-Route::post('/send-contact', [ContactController::class,'sendContact']);
+    Route::get('/product/edit/{product}',[ProductsController::class,'singleProduct'])
+        ->name('product.single');
 
-Route::get('admin/product/edit/{product}',[ProductsController::class,'singleProduct'])
-    ->name('product.single');
+    Route::post('/product/save/{product}',[ProductsController::class,'edit'])
+        ->name('product.save');
 
-Route::post('admin/product/save/{product}',[ProductsController::class,'edit'])
-    ->name('product.save');
+
+});
 
 
 require __DIR__.'/auth.php';
