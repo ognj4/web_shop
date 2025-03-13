@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\ExchangeRates;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -29,13 +30,23 @@ class GetDailyCurrencyValue extends Command
     {
         $currencies = ['usd','eur','rub'];
 
+
+
+
         foreach ($currencies as $currency)
         {
-            $response = Http::get("https://kurs.resenje.org/api/v1/currencies/$currency/rates/today");
-            ExchangeRates::create([
-                'currency' => $currency,
-                'value' => $response->json()['exchange_middle']
-            ]);
+            $todaysCurrency = ExchangeRates::where('currency', $currency)
+                ->whereDate('created_at', Carbon::now())
+                ->first();
+            if ($todaysCurrency !== null) {
+                continue;
+            } else{
+                $response = Http::get("https://kurs.resenje.org/api/v1/currencies/$currency/rates/today");
+                ExchangeRates::create([
+                    'currency' => $currency,
+                    'value' => $response->json()['exchange_middle']
+                ]);
+            }
 
         }
 
