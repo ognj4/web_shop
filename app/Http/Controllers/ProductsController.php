@@ -12,7 +12,6 @@ class ProductsController extends Controller
     public function __construct ()
     {
         $this->productRepo = new ProductRepository();
-
     }
 
     public function index()
@@ -37,7 +36,7 @@ class ProductsController extends Controller
     }
     public function delete($product)
     {
-        $singleProduct = ProductsModel::where(['id' => $product])->first();
+        $singleProduct = $this->productRepo->getProductById($product);
         if ($singleProduct == null) {
             die("Ovaj proizvod ne postoji!");
         }

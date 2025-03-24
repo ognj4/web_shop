@@ -23,4 +23,9 @@ class ProductRepository
             'image' => $request->get('image')
         ]);
     }
+
+    public function getProductById($id)
+    {
+        return $this->productModel->where(['id' => $id])->first();
+    }
 }
