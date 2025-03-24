@@ -9,7 +9,7 @@
         <p>{{ $singleProduct->name }} - {{ $singleProduct->price }}</p>
     @endforeach
 
-    <form method="POST" action="{{ route('sendContact') }}">
+    <form method="POST" action="{{ route('contact.send') }}">
         @if($errors->any())
             <p>Greska: {{$errors->first()}} </p>
         @endif

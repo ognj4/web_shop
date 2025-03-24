@@ -20,7 +20,7 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
         Route::get('/all', 'getAllContacts');
         Route::get('/delete/{contact}','delete')->name('contact.delete');
-        Route::post('/send','sendContact')->name('sendContact');
+        Route::post('/send','sendContact')->name('contact.send');
     });
 
     Route::controller(ProductsController::class)->prefix('/products')->group(function (){
