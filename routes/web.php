@@ -14,27 +14,22 @@ Route::get('/shop',[ShopController::class,'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('/all-contacts', [ContactController::class,'getAllContacts']);
-    Route::get('/all-products', [ProductsController::class,'index'])
-        ->name('sviProizvodi');
-
-    Route::get('/delete-product/{product}', [ProductsController::class,'delete'])
-        ->name('obrisiProizvod');
-    Route::get('/delete-contact/{contact}', [ContactController::class, "delete"])
-        ->name('obrisiKontakt');
 
     Route::view('/add-product', 'addProduct');
-    Route::post('/save-product',[ProductsController::class, 'saveProduct'])
-        ->name('snimanjeOglasa');
 
-    Route::post('/send-contact', [ContactController::class,'sendContact']);
+    Route::controller(ContactController::class)->group(function () {
+        Route::get('/all-contacts', 'getAllContacts');
+        Route::get('/delete-contact/{contact}','delete')->name('obrisiKontakt');
+        Route::post('/send-contact','sendContact');
+    });
 
-    Route::get('/product/edit/{product}',[ProductsController::class,'singleProduct'])
-        ->name('product.single');
-
-    Route::post('/product/save/{product}',[ProductsController::class,'edit'])
-        ->name('product.save');
-
+    Route::controller(ProductsController::class)->group(function (){
+        Route::get('/all-products', 'index')->name('sviProizvodi');
+        Route::get('/delete-product/{product}', 'delete')->name('obrisiProizvod');
+        Route::post('/save-product', 'saveProduct')->name('snimanjeOglasa');
+        Route::get('/product/edit/{product}','singleProduct')->name('product.single');
+        Route::post('/product/save/{product}','edit')->name('product.save');
+    });
 
 });
 
