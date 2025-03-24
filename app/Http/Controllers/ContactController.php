@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SendContactRequest;
 use App\Models\ContactModel;
+use App\Repositories\ContactRepository;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    private $contactRepo;
+
+    public function __construct()
+    {
+        $this->contactRepo = new ContactRepository();
+    }
     public function index()
     {
         return view('contact');
@@ -26,12 +33,7 @@ class ContactController extends Controller
 
     public function sendContact(SendContactRequest $request)
     {
-        ContactModel::create([
-            'email' => $request->get('email'),
-            'subject' => $request->get('subject'),
-            'message' => $request->get('description')
-        ]);
-
+        $this->contactRepo->createNew($request);
         return redirect('admin/all-contacts');
     }
 }
