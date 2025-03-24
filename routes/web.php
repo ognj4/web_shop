@@ -23,12 +23,12 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
         Route::post('/send','sendContact')->name('sendContact');
     });
 
-    Route::controller(ProductsController::class)->group(function (){
-        Route::get('/all-products', 'index')->name('sviProizvodi');
-        Route::get('/delete-product/{product}', 'delete')->name('obrisiProizvod');
-        Route::get('/product/edit/{product}','singleProduct')->name('product.single');
-        Route::post('/product/save/{product}','edit')->name('product.save');
-        Route::post('/save-product', 'saveProduct')->name('snimanjeOglasa');
+    Route::controller(ProductsController::class)->prefix('/products')->group(function (){
+        Route::get('/all', 'index')->name('sviProizvodi');
+        Route::get('/delete/{product}', 'delete')->name('obrisiProizvod');
+        Route::get('/edit/{product}','singleProduct')->name('product.single');
+        Route::post('save/{product}','edit')->name('product.save');
+        Route::post('/save', 'saveProduct')->name('snimanjeOglasa');
     });
 
 });
