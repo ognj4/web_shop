@@ -11,14 +11,9 @@ class ContactController extends Controller
     {
         return view('contact');
     }
-    public function delete($contact)
+    public function delete(ContactModel $contact)
     {
-        $singleContact = ContactModel::where(['id' => $contact])->first();
-        if ($singleContact === null) {
-            die('Nema tog korisnika');
-        }
-
-        $singleContact->delete();
+        $contact->delete();
         return redirect()->back();
     }
 
