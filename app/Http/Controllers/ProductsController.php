@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductsModel;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+    private $productRepo;
+    public function __construct ()
+    {
+        $this->productRepo = new ProductRepository();
+
+    }
+
     public function index()
     {
         $allProducts = ProductsModel::all();
@@ -22,13 +30,7 @@ class ProductsController extends Controller
             'image' => 'required'
         ]);
 
-        ProductsModel::create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'amount' => $request->get('amount'),
-            'price' => $request->get('price'),
-            'image' => $request->get('image')
-        ]);
+        $this->productRepo->createNew($request);
 
         // koriscenje name rute
         return redirect()->route('sviProizvodi');
