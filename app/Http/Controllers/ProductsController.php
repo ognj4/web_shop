@@ -27,16 +27,12 @@ class ProductsController extends Controller
 
         return redirect()->route('sviProizvodi');
     }
-    public function delete($product)
+    public function delete(ProductsModel $product)
     {
-        $singleProduct = $this->productRepo->getProductById($product);
-        if ($singleProduct == null) {
-            die("Ovaj proizvod ne postoji!");
-        }
-        $singleProduct->delete();
+        $product->delete();
         return redirect()->back();
     }
-    public function singleProduct(Request $request, ProductsModel $product)
+    public function singleProduct(ProductsModel $product)
     {
         return view ('products.edit', compact('product'));
     }
