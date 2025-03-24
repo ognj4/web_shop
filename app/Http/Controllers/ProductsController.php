@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditProductRequest;
 use App\Http\Requests\SaveProductRequest;
 use App\Models\ProductsModel;
 use App\Repositories\ProductRepository;
@@ -39,7 +40,7 @@ class ProductsController extends Controller
     {
         return view ('products.edit', compact('product'));
     }
-    public function edit(Request $request, ProductsModel $product)
+    public function edit(EditProductRequest $request, ProductsModel $product)
     {
         $this->productRepo->editProduct($product, $request);
 
