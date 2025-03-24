@@ -2,7 +2,7 @@
 
 @section("sadrzajStranice")
 
-    <form method="POST" action="{{ route('snimanjeOglasa') }}">
+    <form method="POST" action="{{ route('products.create') }}">
         @csrf
         <div>
             @if($errors->any())

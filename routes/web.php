@@ -24,11 +24,11 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
     });
 
     Route::controller(ProductsController::class)->prefix('/products')->group(function (){
-        Route::get('/all', 'index')->name('sviProizvodi');
-        Route::get('/delete/{product}', 'delete')->name('obrisiProizvod');
-        Route::get('/edit/{product}','singleProduct')->name('product.single');
-        Route::post('save/{product}','edit')->name('product.save');
-        Route::post('/save', 'saveProduct')->name('snimanjeOglasa');
+        Route::get('/all', 'index')->name('products.all');
+        Route::get('/delete/{product}', 'delete')->name('products.delete');
+        Route::get('/edit/{product}','singleProduct')->name('products.single');
+        Route::post('save/{product}','edit')->name('products.save');
+        Route::post('/save', 'saveProduct')->name('products.create');
     });
 
 });

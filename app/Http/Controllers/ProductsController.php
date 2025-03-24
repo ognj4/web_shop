@@ -25,7 +25,7 @@ class ProductsController extends Controller
 
         $this->productRepo->createNew($request);
 
-        return redirect()->route('sviProizvodi');
+        return redirect()->route('products.all');
     }
     public function delete(ProductsModel $product)
     {

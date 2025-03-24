@@ -20,8 +20,8 @@
                 <td>{{$product->description}}</td>
                 <td>{{$product->price}}</td>
                 <td>
-                    <a href="{{ route('obrisiProizvod',['product' => $product->id]) }}" class="btn btn-danger">Obrisi</a>
-                    <a href="{{ route('product.single', ['product' => $product->id]) }}" class="btn btn-primary">Edituj</a>
+                    <a href="{{ route('products.delete',['product' => $product->id]) }}" class="btn btn-danger">Obrisi</a>
+                    <a href="{{ route('products.single', ['product' => $product->id]) }}" class="btn btn-primary">Edituj</a>
                 </td>
             </tr>
         @endforeach
