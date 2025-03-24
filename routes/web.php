@@ -19,16 +19,16 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
 
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
         Route::get('/all', 'getAllContacts');
-        Route::post('/send','sendContact')->name('sendContact');
         Route::get('/delete/{contact}','delete')->name('obrisiKontakt');
+        Route::post('/send','sendContact')->name('sendContact');
     });
 
     Route::controller(ProductsController::class)->group(function (){
         Route::get('/all-products', 'index')->name('sviProizvodi');
         Route::get('/delete-product/{product}', 'delete')->name('obrisiProizvod');
-        Route::post('/save-product', 'saveProduct')->name('snimanjeOglasa');
         Route::get('/product/edit/{product}','singleProduct')->name('product.single');
         Route::post('/product/save/{product}','edit')->name('product.save');
+        Route::post('/save-product', 'saveProduct')->name('snimanjeOglasa');
     });
 
 });
