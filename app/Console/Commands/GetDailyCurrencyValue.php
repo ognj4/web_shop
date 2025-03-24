@@ -28,17 +28,12 @@ class GetDailyCurrencyValue extends Command
      */
     public function handle()
     {
-        $currencies = ['usd','eur','rub'];
 
-
-
-
-        foreach ($currencies as $currency)
+        foreach (ExchangeRates::AVAILABLE_CURRENCIES as $currency)
         {
-            $todaysCurrency = ExchangeRates::where('currency', $currency)
-                ->whereDate('created_at', Carbon::now())
-                ->first();
-            if ($todaysCurrency !== null) {
+            $todayCurrency = ExchangeRates::getCurrencyForToday($currency);
+
+            if ($todayCurrency !== null) {
                 continue;
             } else{
                 $response = Http::get("https://kurs.resenje.org/api/v1/currencies/$currency/rates/today");
