@@ -18,9 +18,9 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
     Route::view('/add-product', 'addProduct');
 
     Route::controller(ContactController::class)->group(function () {
-        Route::get('/all-contacts', 'getAllContacts');
-        Route::get('/delete-contact/{contact}','delete')->name('obrisiKontakt');
-        Route::post('/send-contact','sendContact');
+        Route::get('/contact/all', 'getAllContacts');
+        Route::post('/contact/send','sendContact')->name('sendContact');
+        Route::get('/contact/delete/{contact}','delete')->name('obrisiKontakt');
     });
 
     Route::controller(ProductsController::class)->group(function (){
