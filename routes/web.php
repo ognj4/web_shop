@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Middleware\AdminCheckMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ Route::get('/shop',[ShopController::class,'index']);
 Route::get('products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
 
 Route::get('/contact', [ContactController::class, 'index']);
+
+Route::get('/cart',[ShoppingCartController::class, 'index'])->name('cart.all');
+Route::post('/cart/add',[ShoppingCartController::class, 'addToCart'])->name('cart.add');
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 
