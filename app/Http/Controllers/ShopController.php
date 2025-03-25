@@ -9,6 +9,6 @@ class ShopController extends Controller
     public function index()
     {
         $products = ProductsModel::all();
-        return view ('shop', compact('products'));
+        return view('shop', compact('products'));
     }
 }

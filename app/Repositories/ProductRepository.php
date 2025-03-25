@@ -13,7 +13,8 @@ class ProductRepository
     {
         $this->productModel = new ProductsModel();
     }
-    public function createNew ($request)
+
+    public function createNew($request)
     {
         $this->productModel->create([
             'name' => $request->get('name'),
@@ -29,7 +30,8 @@ class ProductRepository
         return $this->productModel->where(['id' => $id])->first();
     }
 
-    public function editProduct($product, $request) {
+    public function editProduct($product, $request)
+    {
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->amount = $request->get('amount');

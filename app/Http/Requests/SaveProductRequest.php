@@ -10,12 +10,13 @@ class SaveProductRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
             'name' => 'required|unique:products',
             'description' => 'required',
-            'amount' =>'required|int|min:0',
+            'amount' => 'required|int|min:0',
             'price' => 'required|min:0',
             'image' => 'required'
         ];

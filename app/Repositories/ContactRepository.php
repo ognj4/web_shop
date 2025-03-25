@@ -13,7 +13,8 @@ class ContactRepository
     {
         $this->contactModel = new ContactModel();
     }
-    public function createNew ($request)
+
+    public function createNew($request)
     {
         $this->productModel->create([
             'email' => $request->get('email'),

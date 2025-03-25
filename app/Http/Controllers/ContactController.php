@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SendContactRequest;
 use App\Models\ContactModel;
 use App\Repositories\ContactRepository;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -15,10 +14,12 @@ class ContactController extends Controller
     {
         $this->contactRepo = new ContactRepository();
     }
+
     public function index()
     {
         return view('contact');
     }
+
     public function delete(ContactModel $contact)
     {
         $contact->delete();
