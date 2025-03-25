@@ -21,6 +21,11 @@ class ProductsController extends Controller
         $allProducts = ProductsModel::all();
         return view('allProducts',compact('allProducts'));
     }
+
+    public function permalink(ProductsModel $product)
+    {
+        return view('products.permalink', compact('product'));
+    }
     public function saveProduct (SaveProductRequest $request){
 
         $this->productRepo->createNew($request);

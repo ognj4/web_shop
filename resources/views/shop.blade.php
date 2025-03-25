@@ -9,7 +9,9 @@
 
     @foreach( $products as $product)
 
-        <p>{{$product->name}} - {{$product->description}}</p>
+        <p>{{$product->name}} </p>
+        <p>{{$product->description}}</p>
+        <a href="{{ route ('products.permalink', ['product' => $product->id]) }}">Detaljnije</a>
 
     @endforeach
 

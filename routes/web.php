@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/about','about');
 Route::get('/',[HomepageController::class,'index']);
 Route::get('/shop',[ShopController::class,'index']);
+Route::get('products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
+
 Route::get('/contact', [ContactController::class, 'index']);
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
