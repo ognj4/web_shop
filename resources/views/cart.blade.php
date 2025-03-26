@@ -5,7 +5,13 @@
 @section('sadrzajStranice')
     <p>Shopping cart</p>
 
-    @foreach($cart as $product )
-        <p> {{$product['product_id']}} -> {{$product['amount']}}</p>
+    @foreach($combinedItems as $item )
+
+                <p> {{$item['name']}} </p>
+                <p> {{$item['amount']}} </p>
+                <p> {{$item['price']}} </p>
+                <p> {{$item['total']}} </p>
+
     @endforeach
+
 @endsection
