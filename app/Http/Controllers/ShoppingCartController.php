@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartAddRequest;
+use App\Models\OrderItems;
+use App\Models\Orders;
 use App\Models\ProductsModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
@@ -12,6 +15,10 @@ class ShoppingCartController extends Controller
     {
         // cuvamo celu korpu
         $cartItems = Session::get('product');
+
+        if (count($cartItems) < 1) {
+            return redirect('/');
+        }
 
         $combined = [];
         // prelazimo preko korpe i
@@ -33,6 +40,42 @@ class ShoppingCartController extends Controller
             'combinedItems' => $combined
         ]);
     }
+
+    public function finishOrder()
+    {
+        $cartItems = Session::get('product');
+        $totalCartPrice = 0;
+        // izvlacimo svaki item i provera da li ga ima na stanju
+        foreach ($cartItems as $item) {
+            $product = ProductsModel::firstWhere(['id'=> $item['product_id']]);
+            $totalCartPrice += $item['amount'] * $product->price;
+
+            if ($item['amount'] > $product->amount) {
+                return redirect()->back();
+            }
+        }
+        $order = Orders::create([
+            'user_id' => Auth::id(),
+            'price' => $totalCartPrice
+        ]);
+
+        foreach ($cartItems as $item) {
+            $product = ProductsModel::firstWhere(['id'=> $item['product_id']]);
+            // skidamo kolicinu
+            $product->amount -= $item['amount'];
+            $product->save();
+
+            OrderItems::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'amount' => $item['amount'],
+                'price' => $item['amount'] * $product->price,
+            ]);
+        }
+        Session::remove('product');
+        return view('thankYou');
+    }
+
     public function addToCart(CartAddRequest $request)
     {
         $product = ProductsModel::where(['id'=> $request->id])->first();
@@ -47,4 +90,6 @@ class ShoppingCartController extends Controller
         ]);
         return redirect()->route('cart.all');
     }
+
+
 }
