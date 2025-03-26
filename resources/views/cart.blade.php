@@ -5,7 +5,7 @@
 @section('sadrzajStranice')
     <p>Shopping cart</p>
 
-    @foreach($cart as $product => $amount )
-        {{ $product .' '. $amount }}
+    @foreach($cart as $product )
+        <p> {{$product['product_id']}} -> {{$product['amount']}}</p>
     @endforeach
 @endsection

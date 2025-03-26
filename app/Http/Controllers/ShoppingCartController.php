@@ -15,8 +15,9 @@ class ShoppingCartController extends Controller
     }
     public function addToCart(CartAddRequest $request)
     {
-        Session::put('product',[
-            $request->id => $request->amount // dodaj [ laptop => 6 kom ]
+        Session::push('product',[
+            'product_id' => $request->id,
+            'amount' => $request->amount,
         ]);
         return redirect()->route('cart.all');
     }
