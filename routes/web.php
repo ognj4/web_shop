@@ -18,6 +18,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::get('/cart',[ShoppingCartController::class, 'index'])->name('cart.all');
 Route::post('/cart/add',[ShoppingCartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/finish',[ShoppingCartController::class, 'finishOrder'])->name('cart.finish');
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 
